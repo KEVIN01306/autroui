@@ -48,7 +48,7 @@ const reviews = Astro.props.reviews as ReviewsProps['reviews'];
             </svg>
         </button>
 
-        <div class="review-track flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 pt-4 px-2 no-scrollbar scroll-smooth">
+        <div class="review-track flex overflow-x-hidden snap-x snap-mandatory gap-6 pb-8 pt-4 px-2 no-scrollbar scroll-smooth">
             {reviews?.map((review) => (
                 <div class="snap-center shrink-0 w-[340px] md:w-[380px] bg-white border border-gray-100 rounded-[32px] p-8 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)] flex flex-col justify-between">
                     <div>
