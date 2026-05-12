@@ -40,15 +40,15 @@ const reviews = Astro.props.reviews as ReviewsProps['reviews'];
         </div>
     </header>
 
-    <div class="relative group review-carousel-container">
+    <div class="relative group review-carousel-container w-full">
         
-        <button class="prev-btn absolute left-0 top-1/2 -translate-y-1/2 -ml-4 lg:-ml-6 z-10 bg-white rounded-full p-2 shadow-[0_2px_8px_rgba(0,0,0,0.1)] text-red-500 hover:bg-gray-50 hover:scale-105 transition-all focus:outline-none" aria-label="Anterior">
+        <button class="prev-btn absolute left-2 lg:-left-6 top-1/2 -translate-y-1/2 -ml-4 lg:-ml-6 z-10 bg-white rounded-full p-2 shadow-[0_2px_8px_rgba(0,0,0,0.1)] text-red-500 hover:bg-gray-50 hover:scale-105 transition-all focus:outline-none" aria-label="Anterior">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
             </svg>
         </button>
 
-        <div class="review-track flex overflow-x-hidden snap-x snap-mandatory gap-6 pb-8 pt-4 px-2 no-scrollbar scroll-smooth">
+        <div class="review-track w-full flex overflow-x-hidden snap-x snap-mandatory gap-6 pb-8 pt-4 px-2 no-scrollbar scroll-smooth">
             {reviews?.map((review) => (
                 <div class="snap-center shrink-0 w-[340px] md:w-[380px] bg-white border border-gray-100 rounded-[32px] p-8 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)] flex flex-col justify-between">
                     <div>
@@ -87,7 +87,7 @@ const reviews = Astro.props.reviews as ReviewsProps['reviews'];
             ))}
         </div>
 
-        <button class="next-btn absolute right-0 top-1/2 -translate-y-1/2 -mr-4 lg:-mr-6 z-10 bg-white rounded-full p-2 shadow-[0_2px_8px_rgba(0,0,0,0.1)] text-red-500 hover:bg-gray-50 hover:scale-105 transition-all focus:outline-none" aria-label="Siguiente">
+        <button class="next-btn absolute right-2 lg:-right-6 top-1/2 -translate-y-1/2 -mr-4 lg:-mr-6 z-10 bg-white rounded-full p-2 shadow-[0_2px_8px_rgba(0,0,0,0.1)] text-red-500 hover:bg-gray-50 hover:scale-105 transition-all focus:outline-none" aria-label="Siguiente">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
             </svg>
