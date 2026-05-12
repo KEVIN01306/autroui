@@ -1,0 +1,39 @@
+{
+    "reviews": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "comment": "I absolutely love Cancundrink! The flavors are so refreshing and perfect for a hot day. I especially enjoy the coconut and mango water, it's like a tropical vacation in a bottle!",
+            "rating": 5,
+            "date": "2024-06-15"
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith",
+            "comment": "Cancundrink has become my go-to drink for staying hydrated. The natural ingredients and unique recipes make it stand out from other beverages. I highly recommend trying their fruit juices, they're delicious!",
+            "rating": 4,
+            "date": "2024-06-10"
+        },
+        {
+            "id": 3,
+            "name": "Emily Johnson",
+            "comment": "I was pleasantly surprised by the quality of Cancundrink. The commitment to using natural ingredients really shines through in the taste. The aloe juices are my favorite, they have a nice balance of flavor and hydration.",
+            "rating": 5,
+            "date": "2024-06-05"
+        },
+        {
+            "id": 4,
+            "name": "Michael Brown",
+            "comment": "Cancundrink offers a unique and refreshing experience. The exclusive recipes make each drink special. I particularly enjoy the coconut milks, they are creamy and delicious.",
+            "rating": 4,
+            "date": "2024-06-01"
+        },
+        {
+            "id": 5,
+            "name": "Sarah Davis",
+            "comment": "I can't get enough of Cancundrink! The tropical purity and commitment to quality really set it apart. The natural ingredients make it a guilt-free indulgence. I highly recommend giving it a try!",
+            "rating": 5,
+            "date": "2024-05-28"
+        }
+    ]
+}
