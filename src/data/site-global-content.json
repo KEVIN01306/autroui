@@ -1,0 +1,50 @@
+{
+    "es": {
+        "nav": [
+            {
+                "id": "home",
+                "label": "Inicio",
+                "path": ""
+            },
+            {
+                "id": "about",
+                "label": "Nosotros",
+                "path": "about",
+                "chilndren": [
+                    {
+                        "id": "futuro",
+                        "label": "Futuro",
+                        "path": "futuro"
+                    }
+                ]
+            }
+        ],
+        "footer": {
+            "rights": "Todos los derechos reservados."
+        }
+    },
+    "en": {
+        "nav": [
+            {
+                "id": "home",
+                "label": "Home",
+                "path": ""
+            },
+            {
+                "id": "about",
+                "label": "About Us",
+                "path": "about",
+                "chilndren": [
+                    {
+                        "id": "future",
+                        "label": "Future Us",
+                        "path": "Future"
+                    }
+                ]
+            }
+        ],
+        "footer": {
+            "rights": "All rights reserved."
+        }
+    }
+}

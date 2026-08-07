@@ -1,10 +1,8 @@
 ---
-import type { Lang } from '../../i18n/config.i18n';
-import { ui } from "../../i18n/ui.i18n";
 import { getLangFromUrl, useTranslations } from '../../i18n/utils.i18n';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const { navLinks } = useTranslations(lang);
 
 const currentPath = Astro.url.pathname;
 const switchLangPath =
@@ -13,7 +11,7 @@ const switchLangPath =
     : currentPath.replace("/en", "/es");
 ---
 
-<nav class="sticky top-0 z-50 w-full px-6 py-4 bg-transparent  backdrop-blur-md border-b border-gray-100">
+<nav class="sticky top-0 z-50 w-full px-6 py-4 bg-transparent backdrop-blur-md border-b border-gray-100">
   <div class="max-w-7xl mx-auto flex justify-between items-center">
     
     <a href={`/${lang}/`} class="flex items-center gap-2 transition hover:opacity-80">
@@ -23,16 +21,39 @@ const switchLangPath =
     <div class="flex items-center gap-6 sm:gap-8">
       
       <ul class="flex items-center gap-6 text-sm font-medium text-gray-600">
-        <li>
-          <a href={`/${lang}/`} class="hover:text-blue-600 transition-colors">
-            {t.nav.home}
-          </a>
-        </li>
-        <li>
-          <a href={`/${lang}/#about`} class="hover:text-blue-600 transition-colors">
-            {t.nav.about}
-          </a>
-        </li>
+        {navLinks.map((item) => (
+          <li class="relative group">
+            <a 
+              href={item.href} 
+              class="flex items-center gap-1 hover:text-blue-600 transition-colors py-1"
+            >
+              {item.label}
+              {item.children && (
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              )}
+            </a>
+
+            {/* Menú flotante desplegable */}
+            {item.children && item.children.length > 0 && (
+              <div class="absolute left-0 top-full hidden group-hover:block pt-2 w-48 z-50">
+                <ul class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-xl shadow-xl p-1.5 flex flex-col gap-1">
+                  {item.children.map((child) => (
+                    <li>
+                      <a
+                        href={child.href}
+                        class="block px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors"
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </li>
+        ))}
       </ul>
 
       <div class="hidden sm:block w-px h-5 bg-gray-200"></div>

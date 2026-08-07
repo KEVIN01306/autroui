@@ -1,49 +1,117 @@
 ---
-import type { Lang } from '../i18n/config.i18n';
-import Navbar from '../components/common/Navbar.astro';
-import Footer from '../components/common/Footer.astro';
-import '../styles/global.css';
-
+import type { Lang } from "../i18n/config.i18n";
+import { LANGUAGES } from "../i18n/config.i18n";
+import Navbar from "../components/common/Navbar.astro";
+import Footer from "../components/common/Footer.astro";
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
 
 interface Props {
 	title: string;
 	lang: Lang;
 	description?: string;
+	image?: string;
+	schema?: object;
+	canonicalPath?: string;
 }
 
-const { title, lang, description = "Web informativa coorporativa" } = Astro.props;
+const {
+	title,
+	lang,
+	description = "Autroui.",
+	image = "/icon.png",
+	schema,
+	canonicalPath,
+} = Astro.props;
 
+const baseUrl = "https://autroui.com";
+
+const baseRoute =
+	canonicalPath !== undefined
+		? canonicalPath
+		: Astro.url.pathname.replace(/^\/[a-z]{2}(\/|$)/, "");
+const cleanRoute = baseRoute.startsWith("/") ? baseRoute.slice(1) : baseRoute;
+
+const canonicalURL = new URL(
+	`/${lang}${cleanRoute ? `/${cleanRoute}` : ""}`,
+	baseUrl,
+).href;
+const socialImageURL = new URL(image, Astro.url.origin).href;
+
+const alternateLinks = Object.keys(LANGUAGES).map((l) => ({
+	lang: l,
+	url: new URL(`/${l}${cleanRoute ? `/${cleanRoute}` : ""}`, baseUrl).href,
+}));
+const defaultLink = new URL(`/es${cleanRoute ? `/${cleanRoute}` : ""}`, baseUrl)
+	.href;
 ---
 
 <!doctype html>
 <html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/icon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-
-		<link rel="canonical" href={Astro.url.href} />
-
-		<link rel="alternate" hreflang="es" href={new URL('/es', Astro.url.origin)} />
-		<link rel="alternate" hreflang="en" href={new URL('/en', Astro.url.origin)} />
-		<link rel="alternate" hreflang="x-default" href={new URL('/es', Astro.url.origin)} />
+		<meta name="theme-color" content="#ffffff" />
+		<link rel="icon" type="image/jpg" href="/icon.jpg" />
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content="index, follow" />
+
+		<link rel="canonical" href={canonicalURL} />
+		{
+			alternateLinks.map(({ lang: l, url }) => (
+				<link rel="alternate" hreflang={l} href={url} />
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={defaultLink} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:site_name" content="Asyncronix" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={socialImageURL} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={title} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalURL} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImageURL} />
+
+		<meta name="apple-mobile-web-app-title" content="Dolex USA" />
+		<meta name="application-name" content="Dolex USA" />
+		<ClientRouter />
+
+		{
+			schema && (
+				<script
+					type="application/ld+json"
+					set:html={JSON.stringify(schema)}
+				/>
+			)
+		}
 	</head>
-	<body class="bg-white text-gray-900 antialiased">
+	<body
+		class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50 antialiased min-h-screen flex flex-col transition-colors duration-300"
+	>
 		<Navbar lang={lang} />
-		<main>
-			
-			<slot /> 
+		<main class="flex-1">
+			<slot />
 		</main>
 		<Footer lang={lang} />
 	</body>
 </html>
 
-
 <style is:global>
 	html {
 		scroll-behavior: smooth;
+	}
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation-duration: 0.4s;
 	}
 </style>

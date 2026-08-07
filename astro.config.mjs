@@ -4,7 +4,12 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import cloudflare from '@astrojs/cloudflare';
+import sitemap from '@astrojs/sitemap';
 import { LANGUAGES } from './src/i18n/config.i18n';
+
+import { getAllSitemapUrls } from './src/utils/seo/sitemapUrls.ts';
+
+const uniqueUrls = getAllSitemapUrls();
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,7 +18,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  site: 'https://kerrinfull.cloud',
+  site: 'https://autroui.com',
 
   adapter: cloudflare(),
   i18n: {
@@ -24,5 +29,18 @@ export default defineConfig({
       fallbackType: 'redirect',
       redirectToDefaultLocale: true,
     }
-  }
+  },
+    integrations: [sitemap({
+    i18n: {
+      defaultLocale: 'es',
+      locales: {
+        en: 'en',
+        es: 'es',
+      },
+    },
+    changefreq: 'weekly',
+    priority: 0.7,
+    lastmod: new Date(),
+    customPages: uniqueUrls
+  })]
 });
